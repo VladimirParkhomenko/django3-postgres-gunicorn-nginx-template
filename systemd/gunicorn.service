@@ -1,0 +1,14 @@
+[Unit]
+Description=<description>
+After=network.target
+
+[Service]
+User=<user_name>
+Group=www-data
+WorkingDirectory=<project_path>/<project_name>
+ExecStart=<project_path>/env/bin/gunicorn  --workers 3 --bind unix:<project_path>/gunicorn/<project_name>.sock <project_name>.wsgi:application
+Restart=on-failure
+
+
+[Install]
+WantedBy=multi-user.target
